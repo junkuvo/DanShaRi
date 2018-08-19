@@ -34,7 +34,7 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
     @BindView(R.id.recyclerview) lateinit var rvList: RecyclerView
 
     private lateinit var adapter: UsageStatsAdapter
-    lateinit var presenterUserStats:UsageStatsPresenter
+    private lateinit var presenterUserStats:UsageStatsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,7 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
 
         rvList.layoutManager = LinearLayoutManager(this)
         adapter = UsageStatsAdapter()
-        rvList.setAdapter(adapter)
+        rvList.adapter = adapter
 
         tvGrantAlert.setOnClickListener({ openPermissionSettings() })
 
