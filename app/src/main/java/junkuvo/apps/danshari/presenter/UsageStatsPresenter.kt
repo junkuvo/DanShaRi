@@ -14,11 +14,11 @@ import java.util.*
 class UsageStatsPresenter(private val view: UsageStatsContract.View, private val context: Context)
     : UsageStatsContract.Presenter {
 
-    private val usageStatsManager:UsageStatsManager = context.getSystemService("usagestats") as UsageStatsManager
-    private val packageManager:PackageManager = context.packageManager
+    private val usageStatsManager: UsageStatsManager = context.getSystemService("usagestats") as UsageStatsManager
+    private val packageManager: PackageManager = context.packageManager
 
-    private val flags = PackageManager.GET_META_DATA or
-            PackageManager.GET_SHARED_LIBRARY_FILES
+    private val flags = PackageManager.GET_META_DATA
+//    or PackageManager.GET_SHARED_LIBRARY_FILES
 //    or PackageManager.GET_UNINSTALLED_PACKAGES
 
     override fun retrieveUsageStats() {
@@ -28,9 +28,12 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
         }
 
         val installedApps = getInstalledAppList()
-        val usageStats = usageStatsManager.queryAndAggregateUsageStats(getStartTime(), System.currentTimeMillis())
+        val usageStats = usageStatsManager.queryUsageStats(
+                // INTERVAL_DAILYで1日単位で一度でも使われているアプリを取得する
+                UsageStatsManager.INTERVAL_MONTHLY, getStartTime(), System.currentTimeMillis())
+//        val usageStats = usageStatsManager.queryAndAggregateUsageStats(getStartTime(), System.currentTimeMillis())
         val stats = ArrayList<UsageStats>()
-        stats.addAll(usageStats.values)
+        stats.addAll(usageStats)
 
         val finalList = buildUsageStatsWrapper(installedApps, stats)
         view.onUsageStatsRetrieved(finalList)
@@ -38,7 +41,7 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
 
     private fun getStartTime(): Long {
         val calendar = Calendar.getInstance()
-        calendar.add(Calendar.YEAR, -1)
+        calendar.add(Calendar.YEAR, -4)
         return calendar.timeInMillis
     }
 
@@ -64,13 +67,21 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
             for (stat in usageStatses) {
                 if (name == stat.packageName) {
                     added = true
-                    list.add(fromUsageStat(stat))
+                    // todo 最新の記録だけをadd
+                    if (!name.contains("com.google.") && !name.contains("com.android.") && name != "android") {
+                        // com.android. か com.google. がpackage nameに含まれたらremove
+                        if(stat.lastTimeUsed > 0) {
+                            list.add(fromUsageStat(stat))
+                        }
+                    }
                 }
             }
-            if (!added) {
-                list.add(fromUsageStat(name))
-            }
+//            if (!added) {
+//                // 新しく登場したアプリ(usageStatsが取得できないアプリ)
+//                list.add(fromUsageStat(name))
+//            }
         }
+        // todo 使用時間短い順　最終起動時間古い順
         list.sort()
         return list
     }

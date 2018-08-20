@@ -1,5 +1,6 @@
 package junkuvo.apps.danshari
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -12,6 +13,7 @@ import android.view.View.VISIBLE
 import android.widget.ProgressBar
 import butterknife.BindView
 import butterknife.ButterKnife
+import junkuvo.apps.danshari.App.Companion.UNINSTALLER_REQUEST_CODE
 import junkuvo.apps.danshari.data.UsageStatsData
 import junkuvo.apps.danshari.presenter.UsageStatsContract
 import junkuvo.apps.danshari.presenter.UsageStatsPresenter
@@ -26,6 +28,7 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
 
     override fun onUserHasNoPermission() {
         showProgressBar(false)
+        // todo 楕円ボタンに変更
         tvGrantAlert.visibility = VISIBLE
     }
 
@@ -45,7 +48,7 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
         adapter = UsageStatsAdapter()
         rvList.adapter = adapter
 
-        tvGrantAlert.setOnClickListener({ openPermissionSettings() })
+        tvGrantAlert.setOnClickListener { openPermissionSettings() }
 
         presenterUserStats = UsageStatsPresenter(this, this)
     }
@@ -68,4 +71,12 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == UNINSTALLER_REQUEST_CODE){
+            if (resultCode == Activity.RESULT_OK){
+
+            }
+        }
+    }
 }

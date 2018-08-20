@@ -9,3 +9,8 @@ fun format(usageStatsWrapper: UsageStatsData): String {
     return format.format(usageStatsWrapper.usageStats?.lastTimeUsed)
 }
 
+fun formatEndTime(usageStatsWrapper: UsageStatsData): String {
+    val format = SimpleDateFormat.getDateInstance(DateFormat.SHORT)
+    return format.format(usageStatsWrapper.usageStats?.lastTimeStamp)
+}
+
