@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Process.myUid
 import android.support.v4.app.AppOpsManagerCompat.MODE_ALLOWED
+import junkuvo.apps.danshari.BuildConfig
 import junkuvo.apps.danshari.data.UsageStatsData
 import java.util.*
 
@@ -51,6 +52,7 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
         for (info in infos) {
             installedApps.add(info.packageName)
         }
+        installedApps.remove(BuildConfig.APPLICATION_ID)// このアプリ抜く
         return installedApps
     }
 
