@@ -1,0 +1,64 @@
+<resources>
+    <dimen name="basic_margin_24dp">24dp</dimen>
+    <dimen name="basic_margin_20dp">20dp</dimen>
+    <dimen name="basic_margin_32dp">32dp</dimen>
+    <dimen name="basic_margin_64dp">64dp</dimen>
+    <dimen name="basic_margin_56dp">56dp</dimen>
+    <dimen name="basic_margin_112dp">112dp</dimen>
+    <dimen name="basic_margin_72dp">72dp</dimen>
+    <dimen name="basic_margin_16dp">16dp</dimen>
+    <dimen name="basic_margin_14dp">14dp</dimen>
+    <dimen name="basic_margin_12dp">12dp</dimen>
+    <dimen name="basic_margin_10dp">10dp</dimen>
+    <dimen name="basic_margin_8dp">8dp</dimen>
+    <dimen name="basic_margin_7dp">7dp</dimen>
+    <dimen name="basic_margin_6dp">6dp</dimen>
+    <dimen name="basic_margin_4dp">4dp</dimen>
+    <dimen name="basic_margin_2dp">2dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="setting_item_height">56dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <dimen name="basic_icon_width">72dp</dimen>
+    <dimen name="basic_icon_height">72dp</dimen>
+    <dimen name="basic_icon_width_mini">36dp</dimen>
+    <dimen name="basic_icon_height_mini">36dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="size_my_page_profile_circle_photo">120dp</dimen>
+
+    <!-- View標準サイズ -->
+    <dimen name="basic_fix_fontsize">12sp</dimen>
+    <dimen name="basic_border_line_width">1dp</dimen>
+    <dimen name="basic_height_h2">24dp</dimen>
+    <dimen name="basic_height_h3">24dp</dimen>
+    <dimen name="basic_blank_l">32dp</dimen>
+    <dimen name="basic_blank">16dp</dimen>
+    <dimen name="basic_blank_s">8dp</dimen>
+    <dimen name="basic_blank_s2">6dp</dimen>
+    <dimen name="basic_blank_ss">4dp</dimen>
+    <dimen name="basic_blank_sss">2dp</dimen>
+    <dimen name="basic_icon_width_s2">32dp</dimen>
+    <dimen name="basic_icon_height_s2">32dp</dimen>
+    <dimen name="ellipse_button_height">40dp</dimen>
+    <dimen name="ellipse_button_radius">20dp</dimen>
+
+    <!-- 年齢確認 -->
+    <dimen name="age_verification_font_size_m">14sp</dimen>
+    <dimen name="age_verification_margin_l">32dp</dimen>
+    <dimen name="age_verification_margin_m">16dp</dimen>
+    <dimen name="age_verification_margin_s">8dp</dimen>
+    <dimen name="age_verification_button_font_size">16dp</dimen>
+    <dimen name="age_verification_button_height">40dp</dimen>
+    <dimen name="age_verification_button_radius">20dp</dimen>
+    <dimen name="age_verification_camera_shooting_area_height">100dp</dimen>
+    <dimen name="age_verification_draw_button_area_height">100dp</dimen>
+    <dimen name="app_bar_height">400dp</dimen>
+    <dimen name="ellipse_corner">12dp</dimen>
+    <dimen name="height_large_card">400dp</dimen>
+    <dimen name="basic_margin_48dp">48dp</dimen>
+
+</resources>

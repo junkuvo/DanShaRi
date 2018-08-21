@@ -1,0 +1,23 @@
+<resources>
+    <declare-styleable name="EllipseButton">
+        <attr name="webSolidColor" format="color" />
+        <attr name="webStrokeColor" format="color" />
+        <attr name="webStrokeWidth" format="dimension" />
+        <attr name="webBold" format="boolean" />
+        <attr name="webText" format="string" />
+        <attr name="webTextColor" format="color" />
+        <attr name="webTextSize" format="dimension" />
+        <attr name="webRadius" format="dimension" />
+        <attr name="webTopLeftRadius" format="dimension" />
+        <attr name="webTopRightRadius" format="dimension" />
+        <attr name="webBottomLeftRadius" format="dimension" />
+        <attr name="webBottomRightRadius" format="dimension" />
+        <!-- 押された時のインタラクションの有無フラグ -->
+        <attr name="webIsPressedInteraction" format="boolean" />
+        <!-- 押された時のインタラクションのテキスト色設定有無フラグ -->
+        <attr name="webIsPressedInteractionTextColor" format="boolean" />
+        <attr name="src" format="reference" />
+        <attr name="srcColor" format="reference" />
+
+    </declare-styleable>
+</resources>

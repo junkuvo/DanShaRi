@@ -31,6 +31,7 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
         val installedApps = getInstalledAppList()
         val usageStats = usageStatsManager.queryUsageStats(
                 // INTERVAL_DAILYで1日単位で一度でも使われているアプリを取得する
+                // todo intervalの意味がよくわからん。
                 UsageStatsManager.INTERVAL_MONTHLY, getStartTime(), System.currentTimeMillis())
 //        val usageStats = usageStatsManager.queryAndAggregateUsageStats(getStartTime(), System.currentTimeMillis())
         val stats = ArrayList<UsageStats>()

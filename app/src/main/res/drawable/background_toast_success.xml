@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/background_toast">
+
+    <item>
+        <shape>
+            <solid android:color="#99008000" />
+            <corners android:topLeftRadius="@dimen/ellipse_corner" android:topRightRadius="@dimen/ellipse_corner" android:bottomLeftRadius="@dimen/ellipse_corner" android:bottomRightRadius="@dimen/ellipse_corner" />
+        </shape>
+    </item>
+
+</selector>

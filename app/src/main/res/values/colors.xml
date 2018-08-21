@@ -2,5 +2,27 @@
 <resources>
     <color name="colorPrimary">#0F2540</color>
     <color name="colorPrimaryDark">#08192D</color>
-    <color name="colorAccent">#867835</color>
+    <color name="colorAccent">#daa520</color>
+
+    <!--透過率-->
+    <string name="color_alpha_5">0d</string>
+    <string name="color_alpha_10">1a</string>
+    <string name="color_alpha_15">26</string>
+    <string name="color_alpha_20">33</string>
+    <string name="color_alpha_25">40</string>
+    <string name="color_alpha_30">4d</string>
+    <string name="color_alpha_35">59</string>
+    <string name="color_alpha_40">66</string>
+    <string name="color_alpha_45">73</string>
+    <string name="color_alpha_50">80</string>
+    <string name="color_alpha_55">8c</string>
+    <string name="color_alpha_60">99</string>
+    <string name="color_alpha_65">a6</string>
+    <string name="color_alpha_70">b3</string>
+    <string name="color_alpha_75">bf</string>
+    <string name="color_alpha_80">cc</string>
+    <string name="color_alpha_85">d9</string>
+    <string name="color_alpha_90">e6</string>
+    <string name="color_alpha_95">f2</string>
+    <string name="color_alpha_100">ff</string>
 </resources>
