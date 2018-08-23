@@ -163,12 +163,10 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
     }
 
     private class TutorialPagesProvider : TutorialPageOptionsProvider {
-        val ACTUAL_PAGES_COUNT = 3
         override fun provide(position: Int): PageOptions {
             var position = position
             @LayoutRes val pageLayoutResId: Int
             val tutorialItems: Array<TransformItem>
-//            position %= ACTUAL_PAGES_COUNT
             when (position) {
                 0 -> {
                     pageLayoutResId = R.layout.fragment_page_first
@@ -176,15 +174,15 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                 }
                 1 -> {
                     pageLayoutResId = R.layout.fragment_page_third
-                    tutorialItems = arrayOf(TransformItem.create(R.id.ivFirstImage, Direction.RIGHT_TO_LEFT, 0.20f), TransformItem.create(R.id.ivSecondImage, Direction.LEFT_TO_RIGHT, 0.06f), TransformItem.create(R.id.ivThirdImage, Direction.RIGHT_TO_LEFT, 0.08f), TransformItem.create(R.id.ivFourthImage, Direction.LEFT_TO_RIGHT, 0.1f), TransformItem.create(R.id.ivFifthImage, Direction.LEFT_TO_RIGHT, 0.03f), TransformItem.create(R.id.ivSixthImage, Direction.LEFT_TO_RIGHT, 0.09f), TransformItem.create(R.id.ivSeventhImage, Direction.LEFT_TO_RIGHT, 0.14f))
+                    tutorialItems = arrayOf(TransformItem.create(R.id.ivFirstImage, Direction.RIGHT_TO_LEFT, 0.20f), TransformItem.create(R.id.ivThirdImage, Direction.RIGHT_TO_LEFT, 0.08f), TransformItem.create(R.id.ivFourthImage, Direction.LEFT_TO_RIGHT, 0.1f), TransformItem.create(R.id.ivFifthImage, Direction.LEFT_TO_RIGHT, 0.03f), TransformItem.create(R.id.ivSixthImage, Direction.LEFT_TO_RIGHT, 0.09f), TransformItem.create(R.id.ivSeventhImage, Direction.LEFT_TO_RIGHT, 0.14f))
                 }
                 2 -> {
                     pageLayoutResId = R.layout.fragment_page_fourth
-                    tutorialItems = arrayOf(TransformItem.create(R.id.ivFirstImage, Direction.RIGHT_TO_LEFT, 0.2f), TransformItem.create(R.id.ivSecondImage, Direction.LEFT_TO_RIGHT, 0.06f), TransformItem.create(R.id.ivThirdImage, Direction.RIGHT_TO_LEFT, 0.08f), TransformItem.create(R.id.ivFourthImage, Direction.LEFT_TO_RIGHT, 0.1f), TransformItem.create(R.id.ivFifthImage, Direction.LEFT_TO_RIGHT, 0.03f), TransformItem.create(R.id.ivSixthImage, Direction.LEFT_TO_RIGHT, 0.09f), TransformItem.create(R.id.ivSeventhImage, Direction.LEFT_TO_RIGHT, 0.14f), TransformItem.create(R.id.ivEighthImage, Direction.LEFT_TO_RIGHT, 0.07f))
+                    tutorialItems = arrayOf(TransformItem.create(R.id.ivFirstImage, Direction.RIGHT_TO_LEFT, 0.2f), TransformItem.create(R.id.ivSecondImage, Direction.LEFT_TO_RIGHT, 0.06f), TransformItem.create(R.id.ivThirdImage, Direction.RIGHT_TO_LEFT, 0.08f), TransformItem.create(R.id.ivSixthImage, Direction.LEFT_TO_RIGHT, 0.09f), TransformItem.create(R.id.ivEighthImage, Direction.LEFT_TO_RIGHT, 0.07f))
                 }
                 3 -> {
                     pageLayoutResId = R.layout.fragment_page_last
-                    tutorialItems = arrayOf(TransformItem.create(R.id.ivFirstImage, Direction.LEFT_TO_RIGHT, 0.20f), TransformItem.create(R.id.ivSecondImage, Direction.RIGHT_TO_LEFT, 0.06f), TransformItem.create(R.id.ivThirdImage, Direction.LEFT_TO_RIGHT, 0.08f), TransformItem.create(R.id.ivFourthImage, Direction.RIGHT_TO_LEFT, 0.1f), TransformItem.create(R.id.ivFifthImage, Direction.RIGHT_TO_LEFT, 0.03f), TransformItem.create(R.id.ivSixthImage, Direction.RIGHT_TO_LEFT, 0.09f), TransformItem.create(R.id.ivSeventhImage, Direction.RIGHT_TO_LEFT, 0.14f), TransformItem.create(R.id.ivEighthImage, Direction.RIGHT_TO_LEFT, 0.07f))
+                    tutorialItems = arrayOf(TransformItem.create(R.id.ivFirstImage, Direction.LEFT_TO_RIGHT, 0.20f), TransformItem.create(R.id.ivSecondImage, Direction.RIGHT_TO_LEFT, 0.06f), TransformItem.create(R.id.ivThirdImage, Direction.LEFT_TO_RIGHT, 0.08f), TransformItem.create(R.id.ivFourthImage, Direction.RIGHT_TO_LEFT, 0.1f), TransformItem.create(R.id.ivSeventhImage, Direction.RIGHT_TO_LEFT, 0.14f), TransformItem.create(R.id.ivEighthImage, Direction.RIGHT_TO_LEFT, 0.07f))
                 }
                 else -> {
                     throw IllegalArgumentException("Unknown position: $position")

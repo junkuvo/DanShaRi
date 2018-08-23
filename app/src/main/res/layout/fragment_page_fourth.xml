@@ -14,10 +14,20 @@
         android:gravity="center"
         android:textStyle="bold"
         android:layout_marginTop="@dimen/basic_margin_48dp"
-        android:text="心もスマホもスッキリ！しましょう"
+        android:text="心もスマホもスッキリ！\nしましょう"
         android:textSize="18sp"
         android:textColor="@android:color/white"
         />
+
+    <android.support.v7.widget.AppCompatImageView
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="100%"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:alpha=".3"
+        android:src="@drawable/clean"/>
 
     <ImageView
         android:id="@+id/ivFirstImage"
@@ -53,19 +63,6 @@
         app:layout_widthPercent="15%" />
 
     <ImageView
-        android:id="@+id/ivFourthImage"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:src="@mipmap/ic_launcher"
-
-        app:layout_heightPercent="10%"
-        app:layout_marginLeftPercent="44%"
-        app:layout_marginTopPercent="52%"
-        app:layout_widthPercent="13%" />
-
-    <ImageView
         android:id="@+id/ivSixthImage"
 
         android:layout_width="wrap_content"
@@ -77,32 +74,6 @@
         app:layout_marginLeftPercent="14%"
         app:layout_marginTopPercent="47%"
         app:layout_widthPercent="20%" />
-
-    <ImageView
-        android:id="@+id/ivSeventhImage"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:src="@mipmap/ic_launcher"
-
-        app:layout_heightPercent="8%"
-        app:layout_marginLeftPercent="22%"
-        app:layout_marginTopPercent="35%"
-        app:layout_widthPercent="17%" />
-
-    <ImageView
-        android:id="@+id/ivFifthImage"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-
-        android:src="@mipmap/ic_launcher"
-
-        app:layout_heightPercent="10%"
-        app:layout_marginTopPercent="33%"
-        app:layout_widthPercent="15%" />
 
     <ImageView
         android:id="@+id/ivEighthImage"

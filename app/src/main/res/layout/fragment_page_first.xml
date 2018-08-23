@@ -15,7 +15,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:layout_marginTop="@dimen/basic_margin_48dp"
-        android:text="最後にいつ使ったけ？…\nもう使わないたくさんのアプリを…"
+        android:text="最後にいつ使ったっけ？…\nもう使わないたくさんのアプリを…"
         android:textSize="18sp"
         android:textColor="@android:color/white"
         />
