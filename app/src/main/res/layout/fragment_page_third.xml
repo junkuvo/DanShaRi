@@ -9,13 +9,24 @@
     tools:ignore="ContentDescription"
     tools:background="@android:color/holo_blue_dark">
 
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/basic_margin_48dp"
+        android:text="ワンタップで断捨離して"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        />
+
     <ImageView
         android:id="@+id/ivThirdImage"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_launcher"
 
         app:layout_heightPercent="40%"
         app:layout_marginTopPercent="27%"
@@ -29,7 +40,7 @@
 
         android:alpha=".5"
 
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_launcher"
 
         app:layout_heightPercent="27%"
         app:layout_marginLeftPercent="20%"
@@ -44,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
 
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_launcher"
 
         app:layout_heightPercent="18%"
         app:layout_widthPercent="55%"/>
@@ -56,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_launcher"
 
         app:layout_heightPercent="7%"
         app:layout_marginLeftPercent="33%"
@@ -69,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_launcher"
 
         app:layout_heightPercent="7%"
         app:layout_marginLeftPercent="57%"
@@ -82,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_launcher"
 
         app:layout_heightPercent="15%"
         app:layout_marginLeftPercent="65%"
@@ -95,7 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_launcher"
 
         app:layout_heightPercent="10%"
         app:layout_marginLeftPercent="77%"

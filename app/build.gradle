@@ -41,6 +41,5 @@ dependencies {
 
     implementation 'com.cleveroad:slidingtutorial:1.0.8'
 
-// fixme 不要
-    compile 'com.android.support:percent:27.1.1'
+    implementation 'com.android.support:percent:27.1.1'
 }

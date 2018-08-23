@@ -96,9 +96,9 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
         // tutorial
         val mPagesColors = intArrayOf(ContextCompat.getColor(this, android.R.color.darker_gray),
                 ContextCompat.getColor(this, android.R.color.holo_green_dark),
-                ContextCompat.getColor(this, android.R.color.holo_red_dark),
+//                ContextCompat.getColor(this, android.R.color.holo_red_dark),
                 ContextCompat.getColor(this, android.R.color.holo_blue_dark),
-                ContextCompat.getColor(this, android.R.color.holo_purple),
+//                ContextCompat.getColor(this, android.R.color.holo_purple),
                 ContextCompat.getColor(this, android.R.color.holo_orange_dark))
         val indicatorOptions = IndicatorOptions.newBuilder(this).build()
         val tutorialPageProvider = TutorialPagesProvider()
@@ -137,10 +137,6 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     private fun openPermissionSettings() {
         startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
     }
@@ -161,6 +157,7 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                 PreferenceUtil.getInstance(this).putLong(LAST_UNINSTALL_TIME.name, System.currentTimeMillis())
                 PreferenceUtil.getInstance(this).putInt(SUM_UNINSTALL_COUNT.name, count + 1)
                 adapter.remove(uninstallingPackageName)
+                CustomToast.success(this, "🎉断捨離成功🙌").show()
             }
         }
     }
@@ -171,7 +168,7 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
             var position = position
             @LayoutRes val pageLayoutResId: Int
             val tutorialItems: Array<TransformItem>
-            position %= ACTUAL_PAGES_COUNT
+//            position %= ACTUAL_PAGES_COUNT
             when (position) {
                 0 -> {
                     pageLayoutResId = R.layout.fragment_page_first
@@ -182,8 +179,12 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                     tutorialItems = arrayOf(TransformItem.create(R.id.ivFirstImage, Direction.RIGHT_TO_LEFT, 0.20f), TransformItem.create(R.id.ivSecondImage, Direction.LEFT_TO_RIGHT, 0.06f), TransformItem.create(R.id.ivThirdImage, Direction.RIGHT_TO_LEFT, 0.08f), TransformItem.create(R.id.ivFourthImage, Direction.LEFT_TO_RIGHT, 0.1f), TransformItem.create(R.id.ivFifthImage, Direction.LEFT_TO_RIGHT, 0.03f), TransformItem.create(R.id.ivSixthImage, Direction.LEFT_TO_RIGHT, 0.09f), TransformItem.create(R.id.ivSeventhImage, Direction.LEFT_TO_RIGHT, 0.14f))
                 }
                 2 -> {
-                    pageLayoutResId = R.layout.fragment_page_second
+                    pageLayoutResId = R.layout.fragment_page_fourth
                     tutorialItems = arrayOf(TransformItem.create(R.id.ivFirstImage, Direction.RIGHT_TO_LEFT, 0.2f), TransformItem.create(R.id.ivSecondImage, Direction.LEFT_TO_RIGHT, 0.06f), TransformItem.create(R.id.ivThirdImage, Direction.RIGHT_TO_LEFT, 0.08f), TransformItem.create(R.id.ivFourthImage, Direction.LEFT_TO_RIGHT, 0.1f), TransformItem.create(R.id.ivFifthImage, Direction.LEFT_TO_RIGHT, 0.03f), TransformItem.create(R.id.ivSixthImage, Direction.LEFT_TO_RIGHT, 0.09f), TransformItem.create(R.id.ivSeventhImage, Direction.LEFT_TO_RIGHT, 0.14f), TransformItem.create(R.id.ivEighthImage, Direction.LEFT_TO_RIGHT, 0.07f))
+                }
+                3 -> {
+                    pageLayoutResId = R.layout.fragment_page_last
+                    tutorialItems = arrayOf(TransformItem.create(R.id.ivFirstImage, Direction.LEFT_TO_RIGHT, 0.20f), TransformItem.create(R.id.ivSecondImage, Direction.RIGHT_TO_LEFT, 0.06f), TransformItem.create(R.id.ivThirdImage, Direction.LEFT_TO_RIGHT, 0.08f), TransformItem.create(R.id.ivFourthImage, Direction.RIGHT_TO_LEFT, 0.1f), TransformItem.create(R.id.ivFifthImage, Direction.RIGHT_TO_LEFT, 0.03f), TransformItem.create(R.id.ivSixthImage, Direction.RIGHT_TO_LEFT, 0.09f), TransformItem.create(R.id.ivSeventhImage, Direction.RIGHT_TO_LEFT, 0.14f), TransformItem.create(R.id.ivEighthImage, Direction.RIGHT_TO_LEFT, 0.07f))
                 }
                 else -> {
                     throw IllegalArgumentException("Unknown position: $position")

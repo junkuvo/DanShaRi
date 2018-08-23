@@ -12,6 +12,7 @@ import butterknife.ButterKnife
 import junkuvo.apps.danshari.ActivityMain
 import junkuvo.apps.danshari.App.Companion.UNINSTALLER_REQUEST_CODE
 import junkuvo.apps.danshari.R
+import junkuvo.apps.danshari.custom_views.CustomToast
 import junkuvo.apps.danshari.data.UsageStatsData
 import junkuvo.apps.danshari.utils.format
 import junkuvo.apps.danshari.utils.formatEndTime
@@ -41,7 +42,8 @@ class UsageStatsViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) 
 //                    intent.putExtra("package_name", packageName)// 渡せなかった
                     activityMain.startActivityForResult(intent, UNINSTALLER_REQUEST_CODE)
                 } else {
-                    // todo toast
+                    // todo report
+                    CustomToast.warning(itemView.context, "エラーが発生しました").show()
                 }
             }
         }

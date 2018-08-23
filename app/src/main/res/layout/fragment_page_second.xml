@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout
+    android:id="@+id/rootFirstPage"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rootSecondPage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@android:color/holo_green_dark"
-    tools:ignore="ContentDescription">
+    tools:ignore="ContentDescription"
+    tools:background="@android:color/holo_orange_dark">
 
     <ImageView
         android:id="@+id/ivFirstImage"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
 
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_launcher"
 
-        app:layout_heightPercent="25%"
-        app:layout_widthPercent="45%" />
+        app:layout_heightPercent="35%"
+        app:layout_widthPercent="50%"/>
 
     <ImageView
         android:id="@+id/ivSecondImage"
@@ -28,14 +28,12 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
 
-        android:alpha=".5"
+        android:src="@mipmap/ic_launcher"
 
-        android:src="@mipmap/ic_launcher_round"
-
-        app:layout_heightPercent="6%"
-        app:layout_marginRightPercent="14%"
-        app:layout_marginTopPercent="30%"
-        app:layout_widthPercent="19%" />
+        app:layout_heightPercent="10%"
+        app:layout_marginRightPercent="12%"
+        app:layout_marginTopPercent="27%"
+        app:layout_widthPercent="12%"/>
 
 
     <ImageView
@@ -44,12 +42,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_launcher"
 
-        app:layout_heightPercent="8%"
-        app:layout_marginLeftPercent="46%"
-        app:layout_marginTopPercent="43%"
-        app:layout_widthPercent="15%" />
+        app:layout_heightPercent="25%"
+        app:layout_marginLeftPercent="14%"
+        app:layout_marginTopPercent="49%"
+        app:layout_widthPercent="30%"/>
 
     <ImageView
         android:id="@+id/ivFourthImage"
@@ -57,38 +55,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_launcher"
 
-        app:layout_heightPercent="10%"
-        app:layout_marginLeftPercent="44%"
-        app:layout_marginTopPercent="52%"
-        app:layout_widthPercent="13%" />
-
-    <ImageView
-        android:id="@+id/ivSixthImage"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:src="@mipmap/ic_launcher_round"
-
-        app:layout_heightPercent="7%"
-        app:layout_marginLeftPercent="20%"
-        app:layout_marginTopPercent="47%"
-        app:layout_widthPercent="20%" />
-
-    <ImageView
-        android:id="@+id/ivSeventhImage"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:src="@mipmap/ic_launcher_round"
-
-        app:layout_heightPercent="8%"
-        app:layout_marginLeftPercent="22%"
-        app:layout_marginTopPercent="35%"
-        app:layout_widthPercent="17%" />
+        app:layout_heightPercent="15%"
+        app:layout_marginLeftPercent="14%"
+        app:layout_marginTopPercent="39%"
+        app:layout_widthPercent="20%"/>
 
     <ImageView
         android:id="@+id/ivFifthImage"
@@ -97,37 +69,49 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
 
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_launcher"
 
-        app:layout_heightPercent="10%"
-        app:layout_marginTopPercent="33%"
-        app:layout_widthPercent="15%" />
+        app:layout_heightPercent="15%"
+        app:layout_marginTopPercent="22%"
+        app:layout_widthPercent="45%"/>
+
+    <ImageView
+        android:id="@+id/ivSixthImage"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@mipmap/ic_launcher"
+
+        app:layout_heightPercent="6%"
+        app:layout_marginLeftPercent="4%"
+        app:layout_marginTopPercent="26%"
+        app:layout_widthPercent="6%"/>
+
+    <ImageView
+        android:id="@+id/ivSeventhImage"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@mipmap/ic_launcher"
+
+        app:layout_heightPercent="8%"
+        app:layout_marginLeftPercent="14%"
+        app:layout_marginTopPercent="25%"
+        app:layout_widthPercent="9%"/>
 
     <ImageView
         android:id="@+id/ivEighthImage"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:src="@mipmap/ic_launcher"
-        app:layout_heightPercent="10%"
-        app:layout_marginTopPercent="22%"
-        app:layout_widthPercent="25%" />
 
-    <junkuvo.apps.danshari.custom_views.Ellipsebutton
-        android:id="@+id/b_grant_permission"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/ellipse_button_height"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/basic_margin_16dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:elevation="@dimen/basic_margin_4dp"
-        app:layout_marginBottomPercent="10%"
-        app:webRadius="@dimen/ellipse_button_radius"
-        app:webSolidColor="@color/colorPrimary"
-        app:webStrokeColor="@color/colorPrimary"
-        app:webText="設定画面へ進む"
-        app:webTextColor="@android:color/white"
-        app:webTextSize="16sp" />
+        android:src="@mipmap/ic_launcher"
+
+        app:layout_heightPercent="6%"
+        app:layout_marginLeftPercent="77%"
+        app:layout_marginTopPercent="38%"
+        app:layout_widthPercent="8%"/>
+
 </android.support.percent.PercentRelativeLayout>
