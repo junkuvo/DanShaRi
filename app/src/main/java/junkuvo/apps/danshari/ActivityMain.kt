@@ -1,6 +1,7 @@
 package junkuvo.apps.danshari
 
 import android.app.Activity
+import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,8 +17,8 @@ import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.FrameLayout
 import android.widget.ProgressBar
-import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.cleveroad.slidingtutorial.*
@@ -27,25 +28,27 @@ import junkuvo.apps.danshari.custom_views.Ellipsebutton
 import junkuvo.apps.danshari.data.UsageStatsData
 import junkuvo.apps.danshari.presenter.UsageStatsContract
 import junkuvo.apps.danshari.presenter.UsageStatsPresenter
+import junkuvo.apps.danshari.utils.PreferenceUtil
+import junkuvo.apps.danshari.utils.PreferenceUtil.PreferenceKey.*
 import junkuvo.apps.danshari.view.UsageStatsAdapter
-
-
 
 
 class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
 
-    private val TOTAL_PAGES = 6
+    private var hasPermission = false
 
     override fun onUsageStatsRetrieved(list: List<UsageStatsData>) {
+        hasPermission = true
         showProgressBar(false)
         tvGrantAlert.visibility = GONE
+        bGrantAlert.visibility = GONE
         adapter.setList(list as ArrayList<UsageStatsData>)
     }
 
     override fun onUserHasNoPermission() {
         showProgressBar(false)
-        // todo 楕円ボタンに変更
         tvGrantAlert.visibility = VISIBLE
+        bGrantAlert.visibility = VISIBLE
     }
 
     @BindView(R.id.progress_bar)
@@ -56,6 +59,11 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
     lateinit var rvList: RecyclerView
     @BindView(R.id.b_grant_permission)
     lateinit var bGrantAlert: Ellipsebutton
+    @BindView(R.id.container)
+    lateinit var flTutorial: FrameLayout
+
+    var uninstallingPackageName = ""
+
 
     private lateinit var adapter: UsageStatsAdapter
     private lateinit var presenterUserStats: UsageStatsPresenter
@@ -73,18 +81,35 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
 
         presenterUserStats = UsageStatsPresenter(this, this)
 
+        if (!PreferenceUtil.getInstance(this).getBoolean(TUTORIAL_DONE.name)) {
+            startTutorial()
+        }
 
-        val mPagesColors = intArrayOf(ContextCompat.getColor(this, android.R.color.darker_gray), ContextCompat.getColor(this, android.R.color.holo_green_dark), ContextCompat.getColor(this, android.R.color.holo_red_dark), ContextCompat.getColor(this, android.R.color.holo_blue_dark), ContextCompat.getColor(this, android.R.color.holo_purple), ContextCompat.getColor(this, android.R.color.holo_orange_dark))
+        showProgressBar(true)
+        // results.putAllが後勝ちなので一応この順番。
+        presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_MONTHLY)
+        presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_WEEKLY)
+        presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_DAILY)
+    }
+
+    private fun startTutorial() {
+        // tutorial
+        val mPagesColors = intArrayOf(ContextCompat.getColor(this, android.R.color.darker_gray),
+                ContextCompat.getColor(this, android.R.color.holo_green_dark),
+                ContextCompat.getColor(this, android.R.color.holo_red_dark),
+                ContextCompat.getColor(this, android.R.color.holo_blue_dark),
+                ContextCompat.getColor(this, android.R.color.holo_purple),
+                ContextCompat.getColor(this, android.R.color.holo_orange_dark))
         val indicatorOptions = IndicatorOptions.newBuilder(this).build()
         val tutorialPageProvider = TutorialPagesProvider()
         val tutorialOptions = TutorialFragment.newTutorialOptionsBuilder(this)
                 .setUseAutoRemoveTutorialFragment(true)
                 .setUseInfiniteScroll(true)
                 .setPagesColors(mPagesColors)
-                .setPagesCount(TOTAL_PAGES)
+                .setPagesCount(mPagesColors.size)
                 .setIndicatorOptions(indicatorOptions)
                 .setTutorialPageProvider(tutorialPageProvider)
-                .setOnSkipClickListener(OnSkipClickListener(this))
+                .setOnSkipClickListener(OnSkipClickListener(this, flTutorial))
                 .build()
         val tutorialFragment = TutorialFragment.newInstance(tutorialOptions)
         fragmentManager
@@ -101,16 +126,19 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item?.itemId
         when (id) {
-            R.id.menu_filter ->
+            R.id.menu_filter -> {
                 CustomToast.warning(this, "現在、開発中です。。").show()
+
+                if (BuildConfig.DEBUG) {
+                    PreferenceUtil.getInstance(this).clear(TUTORIAL_DONE.name)
+                }
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onResume() {
         super.onResume()
-        showProgressBar(true)
-        presenterUserStats.retrieveUsageStats()
     }
 
     private fun openPermissionSettings() {
@@ -129,13 +157,16 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == UNINSTALLER_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-
+                val count = PreferenceUtil.getInstance(this).getInt(SUM_UNINSTALL_COUNT.name)
+                PreferenceUtil.getInstance(this).putLong(LAST_UNINSTALL_TIME.name, System.currentTimeMillis())
+                PreferenceUtil.getInstance(this).putInt(SUM_UNINSTALL_COUNT.name, count + 1)
+                adapter.remove(uninstallingPackageName)
             }
         }
     }
 
     private class TutorialPagesProvider : TutorialPageOptionsProvider {
-         val ACTUAL_PAGES_COUNT = 3
+        val ACTUAL_PAGES_COUNT = 3
         override fun provide(position: Int): PageOptions {
             var position = position
             @LayoutRes val pageLayoutResId: Int
@@ -163,16 +194,19 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
         }
     }
 
-    private class OnSkipClickListener internal constructor(context: Context) : View.OnClickListener {
+    private class OnSkipClickListener internal constructor(context: Context, container: FrameLayout) : View.OnClickListener {
 
         private val mContext: Context
+        private val flTutorial: FrameLayout
 
         init {
             mContext = context.applicationContext
+            flTutorial = container
         }
 
         override fun onClick(v: View) {
-            Toast.makeText(mContext, "Skip button clicked", Toast.LENGTH_SHORT).show()
+            flTutorial.visibility = GONE
+            PreferenceUtil.getInstance(mContext).putBoolean(TUTORIAL_DONE.name, true)
         }
     }
 }

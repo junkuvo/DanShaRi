@@ -9,6 +9,15 @@
     tools:ignore="ContentDescription"
     tools:background="@android:color/holo_orange_dark">
 
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/basic_margin_16dp"
+        android:text="使わないアプリを断捨離して\nスマホも心もスッキリ！"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        />
     <ImageView
         android:id="@+id/ivFirstImage"
 

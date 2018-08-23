@@ -1,5 +1,6 @@
 package junkuvo.apps.danshari.presenter
 
+import android.annotation.SuppressLint
 import android.app.AppOpsManager
 import android.app.AppOpsManager.OPSTR_GET_USAGE_STATS
 import android.app.usage.UsageStats
@@ -11,10 +12,13 @@ import android.support.v4.app.AppOpsManagerCompat.MODE_ALLOWED
 import junkuvo.apps.danshari.BuildConfig
 import junkuvo.apps.danshari.data.UsageStatsData
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class UsageStatsPresenter(private val view: UsageStatsContract.View, private val context: Context)
     : UsageStatsContract.Presenter {
 
+    @SuppressLint("WrongConstant")
     private val usageStatsManager: UsageStatsManager = context.getSystemService("usagestats") as UsageStatsManager
     private val packageManager: PackageManager = context.packageManager
 
@@ -22,7 +26,7 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
 //    or PackageManager.GET_SHARED_LIBRARY_FILES
 //    or PackageManager.GET_UNINSTALLED_PACKAGES
 
-    override fun retrieveUsageStats() {
+    override fun retrieveUsageStats(intervalType: Int) {
         if (!checkForPermission(context)) {
             view.onUserHasNoPermission()
             return
@@ -30,9 +34,9 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
 
         val installedApps = getInstalledAppList()
         val usageStats = usageStatsManager.queryUsageStats(
-                // INTERVAL_DAILYで1日単位で一度でも使われているアプリを取得する
-                // todo intervalの意味がよくわからん。
-                UsageStatsManager.INTERVAL_MONTHLY, getStartTime(), System.currentTimeMillis())
+                // INTERVAL_DAILY 過去1週間の1日単位しか出ない
+                // INTERVAL_WEEKLY 過去1ヶ月の1週間単位で最新しか出ない
+                intervalType, getStartTime(), System.currentTimeMillis())
 //        val usageStats = usageStatsManager.queryAndAggregateUsageStats(getStartTime(), System.currentTimeMillis())
         val stats = ArrayList<UsageStats>()
         stats.addAll(usageStats)
@@ -43,7 +47,7 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
 
     private fun getStartTime(): Long {
         val calendar = Calendar.getInstance()
-        calendar.add(Calendar.YEAR, -4)
+        calendar.add(Calendar.YEAR, -2)
         return calendar.timeInMillis
     }
 
@@ -64,17 +68,27 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
     }
 
     private fun buildUsageStatsWrapper(packageNames: List<String>, usageStatses: List<UsageStats>): List<UsageStatsData> {
-        val list = ArrayList<UsageStatsData>()
+        val map = HashMap<String, UsageStatsData>()
         for (name in packageNames) {
             var added = false
             for (stat in usageStatses) {
                 if (name == stat.packageName) {
                     added = true
-                    // todo 最新の記録だけをadd
                     if (!name.contains("com.google.") && !name.contains("com.android.") && name != "android") {
                         // com.android. か com.google. がpackage nameに含まれたらremove
-                        if(stat.lastTimeUsed > 0) {
-                            list.add(fromUsageStat(stat))
+                        if (stat.lastTimeUsed > 0) {
+                            if (map.containsKey(name)) {
+                                val userStatsData = map[name]
+                                if (userStatsData != null) {
+                                    if (stat.lastTimeUsed > userStatsData.usageStats?.lastTimeUsed ?: 0) {
+                                        // 新しいもの優先
+                                        /// todo プッシュでもlast useになるのでは？？totalTimeInForeground != 0必要かも
+                                        map[name] = fromUsageStat(stat)
+                                    }
+                                }
+                            } else {
+                                map[name] = fromUsageStat(stat)
+                            }
                         }
                     }
                 }
@@ -84,9 +98,8 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
 //                list.add(fromUsageStat(name))
 //            }
         }
-        // todo 使用時間短い順　最終起動時間古い順
-        list.sort()
-        return list
+        // todo 使用時間短い順
+        return ArrayList(map.values)
     }
 
     @Throws(IllegalArgumentException::class)

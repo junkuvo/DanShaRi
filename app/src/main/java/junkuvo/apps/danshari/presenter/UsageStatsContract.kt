@@ -9,6 +9,6 @@ interface UsageStatsContract {
     }
 
     interface Presenter {
-        fun retrieveUsageStats()
+        fun retrieveUsageStats(intervalType: Int)
     }
 }

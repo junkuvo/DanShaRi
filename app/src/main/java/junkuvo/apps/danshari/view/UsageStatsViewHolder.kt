@@ -36,7 +36,9 @@ class UsageStatsViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) 
                     val uri = Uri.fromParts("package", packageName, null)
                     val intent = Intent(Intent.ACTION_DELETE, uri)
                     val activityMain: ActivityMain = itemView.context as ActivityMain
+                    activityMain.uninstallingPackageName = packageName
                     intent.putExtra(Intent.EXTRA_RETURN_RESULT, true)
+//                    intent.putExtra("package_name", packageName)// 渡せなかった
                     activityMain.startActivityForResult(intent, UNINSTALLER_REQUEST_CODE)
                 } else {
                     // todo toast
