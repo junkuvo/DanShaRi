@@ -116,6 +116,8 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                 .beginTransaction()
                 .replace(R.id.container, tutorialFragment)
                 .commit()
+
+        // todo ボタンタップできるかな？
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
