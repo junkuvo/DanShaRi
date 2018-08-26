@@ -76,7 +76,7 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
                     added = true
                     if (!name.contains("com.google.") && !name.contains("com.android.") && name != "android") {
                         // com.android. か com.google. がpackage nameに含まれたらremove
-                        if (stat.lastTimeUsed > 0) {
+                        if (stat.lastTimeUsed > 1409068796 ) {// 2014/08/27 00:59:56適当
                             if (map.containsKey(name)) {
                                 val userStatsData = map[name]
                                 if (userStatsData != null) {

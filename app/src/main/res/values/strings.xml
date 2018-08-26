@@ -4,4 +4,5 @@
     <string name="last_time_used_never">Last time used: never</string>
     <string name="last_time_used">最後に使用した日: %1$s</string>
     <string name="title_filter">絞り込み</string>
+    <string name="button_to_access_permission_screen">アクセス許可設定画面へ進む</string>
 </resources>

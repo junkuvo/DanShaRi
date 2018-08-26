@@ -22,6 +22,7 @@ import android.widget.ProgressBar
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.cleveroad.slidingtutorial.*
+import junkuvo.apps.danshari.App.Companion.PERMISSION_REQUEST_CODE
 import junkuvo.apps.danshari.App.Companion.UNINSTALLER_REQUEST_CODE
 import junkuvo.apps.danshari.custom_views.CustomToast
 import junkuvo.apps.danshari.custom_views.Ellipsebutton
@@ -140,7 +141,7 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
     }
 
     private fun openPermissionSettings() {
-        startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+        startActivityForResult(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS), PERMISSION_REQUEST_CODE)
     }
 
     private fun showProgressBar(show: Boolean) {
@@ -161,6 +162,11 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                 adapter.remove(uninstallingPackageName)
                 CustomToast.success(this, "🎉断捨離成功🙌").show()
             }
+        }else if(requestCode == PERMISSION_REQUEST_CODE) {
+            // results.putAllが後勝ちなので一応この順番。
+            presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_MONTHLY)
+            presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_WEEKLY)
+            presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_DAILY)
         }
     }
 

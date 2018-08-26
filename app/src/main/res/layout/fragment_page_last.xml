@@ -112,7 +112,7 @@
         app:webRadius="@dimen/ellipse_button_radius"
         app:webSolidColor="@color/colorPrimary"
         app:webStrokeColor="@color/colorPrimary"
-        app:webText="アクセス許可設定画面へ進む"
+        app:webText="@string/button_to_access_permission_screen"
         app:webTextColor="@android:color/white"
         app:webTextSize="16sp" />
 </android.support.percent.PercentRelativeLayout>
