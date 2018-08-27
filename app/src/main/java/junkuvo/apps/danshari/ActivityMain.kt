@@ -116,8 +116,10 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                 .beginTransaction()
                 .replace(R.id.container, tutorialFragment)
                 .commit()
+    }
 
-        // todo ボタンタップできるかな？
+    public fun onClick(view: View){
+        openPermissionSettings()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
