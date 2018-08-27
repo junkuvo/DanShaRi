@@ -1,54 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.percent.PercentRelativeLayout
-    android:id="@+id/rootThirdPage"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootThirdPage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="ContentDescription"
-    tools:background="@android:color/holo_blue_dark">
+    tools:background="@android:color/holo_blue_dark"
+    tools:ignore="ContentDescription">
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textStyle="bold"
         android:layout_marginTop="@dimen/basic_margin_48dp"
-        android:text="このアプリから\nワンタップで断捨離して…"
-        android:textSize="18sp"
+        android:gravity="center"
+        android:text="このアプリで一覧にして\nワンタップで断捨離すれば…"
         android:textColor="@android:color/white"
-        />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ivSeventhImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
         android:alpha=".5"
+        android:src="@mipmap/ic_launcher"
         app:layout_heightPercent="15%"
         app:layout_marginLeftPercent="65%"
         app:layout_marginTopPercent="47%"
-        app:layout_widthPercent="25%"/>
-
-    <ImageView
-        android:id="@+id/ivThirdImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/select"
-        app:layout_heightPercent="35%"
-        app:layout_marginTopPercent="20%"
-        app:layout_widthPercent="100%"/>
-
-    <ImageView
-        android:id="@+id/iv_uninstall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/uninstall"
-        android:layout_below="@+id/ivThirdImage"
-        app:layout_heightPercent="34%"
-        app:layout_marginTopPercent="3%"
-        app:layout_widthPercent="100%"/>
+        app:layout_widthPercent="25%" />
 
     <ImageView
         android:id="@+id/ivFirstImage"
@@ -57,7 +36,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="68dp"
-        android:alpha=".5"
+        android:alpha=".3"
         android:src="@mipmap/ic_launcher"
         app:layout_heightPercent="18%"
         app:layout_widthPercent="25%" />
@@ -69,8 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:src="@mipmap/ic_launcher"
         android:alpha=".5"
+        android:src="@mipmap/ic_launcher"
         app:layout_heightPercent="7%"
         app:layout_marginLeftPercent="13%"
         app:layout_marginTopPercent="34%"
@@ -80,22 +59,23 @@
         android:id="@+id/ivSixthImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
         android:alpha=".3"
+        android:src="@mipmap/ic_launcher"
         app:layout_heightPercent="7%"
         app:layout_marginLeftPercent="7%"
         app:layout_marginTopPercent="29%"
-        app:layout_widthPercent="14%"/>
+        app:layout_widthPercent="14%" />
 
     <ImageView
         android:id="@+id/ivFifthImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher"
+        android:alpha="0.2"
         app:layout_heightPercent="10%"
         app:layout_marginLeftPercent="77%"
         app:layout_marginTopPercent="30%"
-        app:layout_widthPercent="15%"/>
+        app:layout_widthPercent="15%" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -106,5 +86,25 @@
         android:textColor="@android:color/white"
         app:layout_heightPercent="15%"
         app:layout_marginBottomPercent="11%"
-        app:layout_widthPercent="45%"/>
+        app:layout_widthPercent="45%" />
+
+    <ImageView
+        android:id="@+id/ivThirdImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/select"
+        app:layout_heightPercent="35%"
+        app:layout_marginTopPercent="20%"
+        app:layout_widthPercent="100%" />
+
+    <ImageView
+        android:id="@+id/iv_uninstall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivThirdImage"
+        android:src="@drawable/uninstall"
+        app:layout_heightPercent="34%"
+        app:layout_marginTopPercent="3%"
+        app:layout_widthPercent="100%" />
+
 </android.support.percent.PercentRelativeLayout>

@@ -14,7 +14,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:layout_marginTop="@dimen/basic_margin_48dp"
-        android:text="心もスマホもスッキリ！\nしましょう"
+        android:text="心もスマホもスッキリ！"
         android:textSize="18sp"
         android:textColor="@android:color/white"
         />

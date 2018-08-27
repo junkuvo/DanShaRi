@@ -1,36 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.percent.PercentRelativeLayout
-    android:id="@+id/rootFirstPage"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootFirstPage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="ContentDescription"
-    tools:background="@android:color/holo_orange_dark">
+    tools:background="@android:color/holo_orange_dark"
+    tools:ignore="ContentDescription">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:alpha=".3"
+        android:scaleType="centerCrop"
+        android:src="@drawable/many_apps"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="100%" />
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textStyle="bold"
         android:layout_marginTop="@dimen/basic_margin_48dp"
+        android:gravity="center"
         android:text="最後にいつ使ったっけ？…\nもう使わないたくさんのアプリを…"
-        android:textSize="18sp"
         android:textColor="@android:color/white"
-        />
-    <ImageView
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/ivFirstImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/many_apps"
         app:layout_heightPercent="35%"
-        app:layout_widthPercent="50%"/>
+        app:layout_widthPercent="70%" />
 
     <ImageView
         android:id="@+id/ivSecondImage"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -39,21 +47,18 @@
         app:layout_heightPercent="10%"
         app:layout_marginRightPercent="12%"
         app:layout_marginTopPercent="27%"
-        app:layout_widthPercent="12%"/>
+        app:layout_widthPercent="12%" />
 
 
     <ImageView
         android:id="@+id/ivThirdImage"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:src="@drawable/camera"
-
+        android:src="@drawable/ic_android"
         app:layout_heightPercent="25%"
         app:layout_marginLeftPercent="14%"
         app:layout_marginTopPercent="49%"
-        app:layout_widthPercent="30%"/>
+        app:layout_widthPercent="30%" />
 
     <ImageView
         android:id="@+id/ivFourthImage"
@@ -63,58 +68,46 @@
         app:layout_heightPercent="15%"
         app:layout_marginLeftPercent="14%"
         app:layout_marginTopPercent="39%"
-        app:layout_widthPercent="20%"/>
+        app:layout_widthPercent="20%" />
 
     <ImageView
         android:id="@+id/ivFifthImage"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-
-        android:src="@mipmap/ic_launcher"
-
+        android:src="@drawable/alarm"
         app:layout_heightPercent="15%"
+        app:layout_marginLeftPercent="25%"
         app:layout_marginTopPercent="22%"
-        app:layout_widthPercent="45%"/>
+        app:layout_widthPercent="45%" />
 
     <ImageView
         android:id="@+id/ivSixthImage"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:src="@mipmap/ic_launcher"
-
+        android:src="@drawable/protect"
         app:layout_heightPercent="6%"
         app:layout_marginLeftPercent="4%"
         app:layout_marginTopPercent="26%"
-        app:layout_widthPercent="6%"/>
+        app:layout_widthPercent="6%" />
 
     <ImageView
         android:id="@+id/ivSeventhImage"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:src="@mipmap/ic_launcher"
-
+        android:src="@drawable/camera"
         app:layout_heightPercent="8%"
         app:layout_marginLeftPercent="14%"
         app:layout_marginTopPercent="25%"
-        app:layout_widthPercent="9%"/>
+        app:layout_widthPercent="9%" />
 
     <ImageView
         android:id="@+id/ivEighthImage"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:src="@mipmap/ic_launcher"
-
+        android:src="@drawable/music"
         app:layout_heightPercent="6%"
         app:layout_marginLeftPercent="77%"
         app:layout_marginTopPercent="38%"
-        app:layout_widthPercent="8%"/>
+        app:layout_widthPercent="8%" />
 
 </android.support.percent.PercentRelativeLayout>

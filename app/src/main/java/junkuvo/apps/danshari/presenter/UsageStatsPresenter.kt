@@ -70,20 +70,19 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
     private fun buildUsageStatsWrapper(packageNames: List<String>, usageStatses: List<UsageStats>): List<UsageStatsData> {
         val map = HashMap<String, UsageStatsData>()
         for (name in packageNames) {
-            var added = false
             for (stat in usageStatses) {
                 if (name == stat.packageName) {
-                    added = true
                     if (!name.contains("com.google.") && !name.contains("com.android.") && name != "android") {
                         // com.android. か com.google. がpackage nameに含まれたらremove
-                        if (stat.lastTimeUsed > 1409068796 ) {// 2014/08/27 00:59:56適当
+                        if (stat.lastTimeUsed > 1409068796) {// 2014/08/27 00:59:56適当
                             if (map.containsKey(name)) {
                                 val userStatsData = map[name]
                                 if (userStatsData != null) {
                                     if (stat.lastTimeUsed > userStatsData.usageStats?.lastTimeUsed ?: 0) {
-                                        // 新しいもの優先
-                                        /// todo プッシュでもlast useになるのでは？？totalTimeInForeground != 0必要かも
-                                        map[name] = fromUsageStat(stat)
+                                        if (stat.totalTimeInForeground > 5000) {// 5秒以上使っていること（pushでもlast useになってしまう）
+                                            // 新しいもの優先で上書き
+                                            map[name] = fromUsageStat(stat)
+                                        }
                                     }
                                 }
                             } else {
@@ -98,7 +97,6 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
 //                list.add(fromUsageStat(name))
 //            }
         }
-        // todo 使用時間短い順
         return ArrayList(map.values)
     }
 
