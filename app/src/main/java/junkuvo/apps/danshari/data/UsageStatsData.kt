@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable
 
 class UsageStatsData(public var usageStats: UsageStats?,  var appIcon: Drawable,  var appName: String) : Comparable<UsageStatsData> {
 
+     var previousTime:Long = 0
+
     override fun compareTo(other: UsageStatsData): Int {
         return if (usageStats == null && other.usageStats != null) {
             1

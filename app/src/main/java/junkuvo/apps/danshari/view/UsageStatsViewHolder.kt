@@ -14,6 +14,7 @@ import junkuvo.apps.danshari.App.Companion.UNINSTALLER_REQUEST_CODE
 import junkuvo.apps.danshari.R
 import junkuvo.apps.danshari.custom_views.CustomToast
 import junkuvo.apps.danshari.data.UsageStatsData
+import junkuvo.apps.danshari.utils.calculateMonthDiff
 import junkuvo.apps.danshari.utils.format
 import junkuvo.apps.danshari.utils.formatEndTime
 
@@ -25,6 +26,8 @@ class UsageStatsViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) 
     lateinit var ivAppIcon: AppCompatImageView
     @BindView(R.id.tv_title)
     lateinit var tvAppTitle: AppCompatTextView
+    @BindView(R.id.tv_month)
+    lateinit var tvMonth: AppCompatTextView
 
     var packageName: String = ""
 
@@ -62,6 +65,21 @@ class UsageStatsViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) 
             tvLastUsed.text = tvAppTitle.context.getString(R.string.last_time_used,
                     format(usageStatsWrapper))
         }
+
+        val diffText = calculateMonthDiff(usageStatsWrapper.usageStats?.lastTimeUsed ?: 0)
+        if (adapterPosition == 0) {
+            if (diffText.isNotEmpty()) {
+                tvMonth.text = diffText
+                tvMonth.visibility = View.VISIBLE
+            }
+        } else {
+            val diffPreviousText = calculateMonthDiff(usageStatsWrapper.previousTime)
+            if (diffPreviousText != diffText) {
+                tvMonth.text = diffText
+                tvMonth.visibility = View.VISIBLE
+            }
+        }
+
         Log.d("okubookubo", usageStatsWrapper.usageStats?.totalTimeInForeground.toString() + ":"
                 + usageStatsWrapper.usageStats?.packageName + usageStatsWrapper.appName
                 + (usageStatsWrapper.usageStats?.lastTimeUsed ?: "null")

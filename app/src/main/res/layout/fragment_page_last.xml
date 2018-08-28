@@ -82,11 +82,11 @@
         android:id="@+id/ivFirstImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_marginTopPercent="27%"
+        app:layout_marginTopPercent="32%"
         android:layout_centerHorizontal="true"
         android:src="@drawable/tutorial_permission"
-        app:layout_heightPercent="55%"
-        app:layout_widthPercent="55%" />
+        app:layout_heightPercent="45%"
+        app:layout_widthPercent="100%" />
 
     <ImageView
         android:id="@+id/ivEighthImage"

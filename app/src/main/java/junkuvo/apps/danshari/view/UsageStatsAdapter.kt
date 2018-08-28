@@ -13,7 +13,7 @@ class UsageStatsAdapter() : RecyclerView.Adapter<UsageStatsViewHolder>() {
         setHasStableIds(true)
     }
 
-//    var results: ArrayList<UsageStatsData> = ArrayList()
+    //    var results: ArrayList<UsageStatsData> = ArrayList()
     var results: HashMap<String?, UsageStatsData> = HashMap()
     var resultList: ArrayList<UsageStatsData> = ArrayList()
 
@@ -29,13 +29,15 @@ class UsageStatsAdapter() : RecyclerView.Adapter<UsageStatsViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: UsageStatsViewHolder, position: Int) {
-        val valueList = ArrayList(results.values.sortedBy { it.usageStats?.lastTimeUsed })
-        holder.bindTo(valueList[position])
-        Log.d("okubookubo", getItemId(position).toString())
+        if (position != 0) {
+            val previous = resultList[position - 1].usageStats?.lastTimeUsed ?: 0
+            resultList[position].previousTime = previous
+        }
+        holder.bindTo(resultList[position])
     }
 
     fun setList(list: ArrayList<UsageStatsData>) {
-        val map = list.associateBy({it.usageStats?.packageName}, {it})
+        val map = list.associateBy({ it.usageStats?.packageName }, { it })
         this.results.putAll(map)
         resultList = ArrayList(results.values.sortedBy { it.usageStats?.lastTimeUsed })
         notifyDataSetChanged()
@@ -45,7 +47,7 @@ class UsageStatsAdapter() : RecyclerView.Adapter<UsageStatsViewHolder>() {
         return resultList[position].hashCode().toLong()
     }
 
-    fun remove(packageName: String){
+    fun remove(packageName: String) {
         val usageStatsData = results[packageName]
         val position = resultList.indexOf(usageStatsData)
         results.remove(packageName)

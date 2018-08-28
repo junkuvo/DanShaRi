@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Process.myUid
 import android.support.v4.app.AppOpsManagerCompat.MODE_ALLOWED
+import com.crashlytics.android.Crashlytics
 import junkuvo.apps.danshari.BuildConfig
 import junkuvo.apps.danshari.data.UsageStatsData
 import java.util.*
@@ -119,6 +120,7 @@ class UsageStatsPresenter(private val view: UsageStatsContract.View, private val
             return UsageStatsData(usageStats, packageManager.getApplicationIcon(ai), packageManager.getApplicationLabel(ai).toString())
 
         } catch (e: PackageManager.NameNotFoundException) {
+            Crashlytics.logException(e)
             throw IllegalArgumentException(e)
         }
     }

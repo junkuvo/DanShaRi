@@ -1,38 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:padding="@dimen/basic_margin_8dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/ripple">
-
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/iv_app_icon"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_alignParentStart="true"
-        android:paddingEnd="16dp"
-        android:paddingStart="8dp"
-        tools:src="@mipmap/ic_launcher" />
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_month"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/iv_app_icon"
-        android:maxLines="1"
-        android:lines="1"
-        android:paddingTop="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        tools:text="Google" />
+        android:padding="@dimen/basic_margin_4dp"
+        android:layout_marginLeft="@dimen/basic_margin_16dp"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:text="3ヶ月以上前"
+        tools:visibility="visible"/>
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_last_used"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_title"
-        android:layout_toEndOf="@id/iv_app_icon"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        tools:text="Last used: yesterday at 18.54" />
+        android:background="@drawable/ripple"
+        android:padding="@dimen/basic_margin_8dp">
 
-</RelativeLayout>
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_app_icon"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_alignParentStart="true"
+            android:paddingEnd="16dp"
+            android:paddingStart="8dp"
+            tools:src="@mipmap/ic_launcher" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/iv_app_icon"
+            android:lines="1"
+            android:maxLines="1"
+            android:paddingTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            tools:text="Google" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_last_used"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_toEndOf="@id/iv_app_icon"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            tools:text="Last used: yesterday at 18.54" />
+
+    </RelativeLayout>
+</LinearLayout>
