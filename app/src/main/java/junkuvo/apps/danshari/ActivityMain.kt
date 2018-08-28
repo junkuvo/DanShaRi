@@ -105,7 +105,7 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
         val tutorialPageProvider = TutorialPagesProvider()
         val tutorialOptions = TutorialFragment.newTutorialOptionsBuilder(this)
                 .setUseAutoRemoveTutorialFragment(true)
-                .setUseInfiniteScroll(true)
+                .setUseInfiniteScroll(false)
                 .setPagesColors(mPagesColors)
                 .setPagesCount(mPagesColors.size)
                 .setIndicatorOptions(indicatorOptions)
@@ -117,6 +117,10 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                 .beginTransaction()
                 .replace(R.id.container, tutorialFragment)
                 .commit()
+    }
+
+    public fun onClick(view: View){
+        openPermissionSettings()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
