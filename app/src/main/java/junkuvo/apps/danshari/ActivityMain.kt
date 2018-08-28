@@ -104,7 +104,7 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
         val indicatorOptions = IndicatorOptions.newBuilder(this).build()
         val tutorialPageProvider = TutorialPagesProvider()
         val tutorialOptions = TutorialFragment.newTutorialOptionsBuilder(this)
-                .setUseAutoRemoveTutorialFragment(true)
+                .setUseAutoRemoveTutorialFragment(false)
                 .setUseInfiniteScroll(false)
                 .setPagesColors(mPagesColors)
                 .setPagesCount(mPagesColors.size)
