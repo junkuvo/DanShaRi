@@ -21,6 +21,7 @@ import android.widget.FrameLayout
 import android.widget.ProgressBar
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeSuccessDialog
 import com.cleveroad.slidingtutorial.*
 import junkuvo.apps.danshari.App.Companion.PERMISSION_REQUEST_CODE
 import junkuvo.apps.danshari.App.Companion.UNINSTALLER_REQUEST_CODE
@@ -119,7 +120,7 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                 .commit()
     }
 
-    public fun onClick(view: View){
+    public fun onClick(view: View) {
         openPermissionSettings()
     }
 
@@ -163,8 +164,23 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                 PreferenceUtil.getInstance(this).putInt(SUM_UNINSTALL_COUNT.name, count + 1)
                 adapter.remove(uninstallingPackageName)
                 CustomToast.success(this, "🎉断捨離成功🙌").show()
+            } else if (resultCode == Activity.RESULT_FIRST_USER) {
+                // アンインストールできないアプリ
+                AwesomeSuccessDialog(this)
+                        .setTitle("断捨離成功！")
+                        .setMessage("アンインストールできないアプリでしたが…\n\n初期化に成功！\nキレイになりました！")
+                        .setColoredCircle(R.color.colorRoyalGreen)
+                        .setDialogIconAndColor(R.drawable.ic_dialog_info, R.color.white)
+                        .setCancelable(true)
+                        .setPositiveButtonText("閉じる")
+                        .setPositiveButtonbackgroundColor(R.color.colorRoyalGreen)
+                        .setPositiveButtonTextColor(R.color.white)
+                        .setNegativeButtonText(getString(R.string.dialog_no_button))
+                        .setNegativeButtonbackgroundColor(R.color.colorRoyalGreen)
+                        .setNegativeButtonTextColor(R.color.white)
+                        .show()
             }
-        }else if(requestCode == PERMISSION_REQUEST_CODE) {
+        } else if (requestCode == PERMISSION_REQUEST_CODE) {
             // results.putAllが後勝ちなので一応この順番。
             presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_MONTHLY)
             presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_WEEKLY)

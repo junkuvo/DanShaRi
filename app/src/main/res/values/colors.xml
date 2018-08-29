@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#08192D</color>
     <color name="colorAccent">#daa520</color>
     <color name="colorSecondary">#AB3B3A</color>
+    <color name="colorRoyalGreen">#0F4C3A</color>
+
 
     <!--透過率-->
     <string name="color_alpha_5">0d</string>
