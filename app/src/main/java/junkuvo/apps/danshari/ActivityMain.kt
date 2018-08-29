@@ -22,6 +22,7 @@ import android.widget.ProgressBar
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeSuccessDialog
+import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure
 import com.cleveroad.slidingtutorial.*
 import junkuvo.apps.danshari.App.Companion.PERMISSION_REQUEST_CODE
 import junkuvo.apps.danshari.App.Companion.UNINSTALLER_REQUEST_CODE
@@ -173,6 +174,7 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                         .setDialogIconAndColor(R.drawable.ic_dialog_info, R.color.white)
                         .setCancelable(true)
                         .setPositiveButtonText("閉じる")
+                        .setPositiveButtonClick(Closure {  })// 押して閉じる
                         .setPositiveButtonbackgroundColor(R.color.colorRoyalGreen)
                         .setPositiveButtonTextColor(R.color.white)
                         .show()
