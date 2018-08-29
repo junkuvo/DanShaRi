@@ -175,9 +175,6 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                         .setPositiveButtonText("閉じる")
                         .setPositiveButtonbackgroundColor(R.color.colorRoyalGreen)
                         .setPositiveButtonTextColor(R.color.white)
-                        .setNegativeButtonText(getString(R.string.dialog_no_button))
-                        .setNegativeButtonbackgroundColor(R.color.colorRoyalGreen)
-                        .setNegativeButtonTextColor(R.color.white)
                         .show()
             }
         } else if (requestCode == PERMISSION_REQUEST_CODE) {
