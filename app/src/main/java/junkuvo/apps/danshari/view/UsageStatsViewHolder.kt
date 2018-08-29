@@ -66,17 +66,23 @@ class UsageStatsViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) 
                     format(usageStatsWrapper))
         }
 
+        // このアイテムの時間と今の差分を計算
         val diffText = calculateMonthDiff(usageStatsWrapper.usageStats?.lastTimeUsed ?: 0)
         if (adapterPosition == 0) {
             if (diffText.isNotEmpty()) {
                 tvMonth.text = diffText
                 tvMonth.visibility = View.VISIBLE
+            }else{
+                tvMonth.visibility = View.GONE
             }
         } else {
+            // 一つ上のアイテムの時間と今の差分
             val diffPreviousText = calculateMonthDiff(usageStatsWrapper.previousTime)
-            if (diffPreviousText != diffText) {
+            if (diffPreviousText != diffText && diffText.isNotEmpty()) {
                 tvMonth.text = diffText
                 tvMonth.visibility = View.VISIBLE
+            }else{
+                tvMonth.visibility = View.GONE
             }
         }
 

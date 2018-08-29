@@ -24,11 +24,11 @@ fun calculateMonthDiff(target: Long): String {
     val diffMonth = diff / (TimeUnit.DAYS.toMillis(30))
 
     if(diffYear > 0) {
-        return diffYear.toString() + "年以上使っていない"
+        return diffYear.toString() + "年以上使っていないアプリ"
     } else if(diffMonth > 0){
-        return diffMonth.toString() + "ヶ月以上使っていない"
+        return diffMonth.toString() + "ヶ月以上使っていないアプリ"
     }else {
-        return ""
+        return "最近使ったアプリ"
     }
 }
 

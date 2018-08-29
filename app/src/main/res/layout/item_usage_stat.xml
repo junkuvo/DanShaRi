@@ -13,6 +13,7 @@
         android:layout_marginLeft="@dimen/basic_margin_16dp"
         android:gravity="center_vertical"
         android:textStyle="bold"
+        android:textColor="@color/colorSecondary"
         android:visibility="gone"
         tools:text="3ヶ月以上前"
         tools:visibility="visible"/>
