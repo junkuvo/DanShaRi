@@ -50,6 +50,8 @@ dependencies {
 
     // dialog
     implementation 'com.github.blennerSilva:AwesomeDialog:2.0.5'
+
+    implementation 'com.google.android.gms:play-services-ads:15.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -1,6 +1,7 @@
 package junkuvo.apps.danshari
 
 import android.app.Application
+import com.google.android.gms.ads.MobileAds
 
 
 class App : Application() {
@@ -12,5 +13,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 //        Fabric.with(this, Crashlytics())
+        MobileAds.initialize(this, "ca-app-pub-1630604043812019~3470457799")
     }
 }
