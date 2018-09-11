@@ -74,6 +74,11 @@ class UsageStatsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun addAdView(){
+        resultList.add(AD_POSITION, UsageStatsData())
+        notifyItemInserted(AD_POSITION)
+    }
+
     override fun getItemId(position: Int): Long {
         if (position == AD_POSITION) {
             return 0 // ad id
@@ -96,7 +101,7 @@ class UsageStatsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return VIEW_TYPE_ITEM
     }
 
-    final val AD_POSITION = 2
+    final val AD_POSITION = 2// 0,1,2の2
     final val VIEW_TYPE_ITEM: Int = 0
     final val VIEW_TYPE_AD: Int = 1
 }

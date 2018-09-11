@@ -22,7 +22,6 @@ import android.widget.ProgressBar
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeSuccessDialog
-import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure
 import com.cleveroad.slidingtutorial.*
 import junkuvo.apps.danshari.App.Companion.PERMISSION_REQUEST_CODE
 import junkuvo.apps.danshari.App.Companion.UNINSTALLER_REQUEST_CODE
@@ -31,6 +30,8 @@ import junkuvo.apps.danshari.custom_views.Ellipsebutton
 import junkuvo.apps.danshari.data.UsageStatsData
 import junkuvo.apps.danshari.presenter.UsageStatsContract
 import junkuvo.apps.danshari.presenter.UsageStatsPresenter
+import junkuvo.apps.danshari.utils.FirebaseEventUtil
+import junkuvo.apps.danshari.utils.FirebaseEventUtil.*
 import junkuvo.apps.danshari.utils.PreferenceUtil
 import junkuvo.apps.danshari.utils.PreferenceUtil.PreferenceKey.*
 import junkuvo.apps.danshari.view.UsageStatsAdapter
@@ -76,6 +77,10 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
         setContentView(R.layout.activity_main)
         ButterKnife.bind(this)
 
+        if (FirebaseEventUtil.getInstance() == null) {
+            FirebaseEventUtil.initFirebase(application)
+        }
+
         rvList.layoutManager = LinearLayoutManager(this)
         adapter = UsageStatsAdapter()
         rvList.adapter = adapter
@@ -89,10 +94,7 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
         }
 
         showProgressBar(true)
-        // results.putAllが後勝ちなので一応この順番。
-        presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_MONTHLY)
-        presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_WEEKLY)
-        presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_DAILY)
+        retrieveAppUsageStats()
     }
 
     private fun startTutorial() {
@@ -140,12 +142,15 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                     PreferenceUtil.getInstance(this).clear(TUTORIAL_DONE.name)
                 }
             }
+            R.id.menu_my_data -> {
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
     private fun openPermissionSettings() {
         startActivityForResult(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS), PERMISSION_REQUEST_CODE)
+        FirebaseEventUtil.sendPermissionProcess(PERMISSION_PROCESS_OPEN)
     }
 
     private fun showProgressBar(show: Boolean) {
@@ -165,26 +170,36 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                 PreferenceUtil.getInstance(this).putInt(SUM_UNINSTALL_COUNT.name, count + 1)
                 adapter.remove(uninstallingPackageName)
                 CustomToast.success(this, "🎉断捨離成功🙌").show()
+                FirebaseEventUtil.sendUninstall(UNINSTALL_TYPE_UNINSTALLED)
             } else if (resultCode == Activity.RESULT_FIRST_USER) {
                 // アンインストールできないアプリ
                 AwesomeSuccessDialog(this)
                         .setTitle("断捨離成功！")
                         .setMessage("アンインストールできないアプリでしたが…\n\n初期化に成功！\nキレイになりました！")
                         .setColoredCircle(R.color.colorRoyalGreen)
-                        .setDialogIconAndColor(R.drawable.ic_dialog_info, R.color.white)
+                        .setDialogIconAndColor(R.drawable.ic_done_white_36dp, R.color.white)
                         .setCancelable(true)
                         .setPositiveButtonText("閉じる")
-                        .setPositiveButtonClick(Closure {  })// 押して閉じる
+                        .setPositiveButtonClick({ })// 押して閉じる
                         .setPositiveButtonbackgroundColor(R.color.colorRoyalGreen)
                         .setPositiveButtonTextColor(R.color.white)
                         .show()
+
+
+                FirebaseEventUtil.sendUninstall(UNINSTALL_TYPE_CLEAR)
+
             }
-        } else if (requestCode == PERMISSION_REQUEST_CODE) {
-            // results.putAllが後勝ちなので一応この順番。
-            presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_MONTHLY)
-            presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_WEEKLY)
-            presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_DAILY)
+        } else if (requestCode == PERMISSION_REQUEST_CODE) {// resultCodeは On/Offにしろ 0(画面1個はさむから)
+            retrieveAppUsageStats()
         }
+    }
+
+    private fun retrieveAppUsageStats() {
+        // results.putAllが後勝ちなので一応この順番。
+        presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_MONTHLY)
+        presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_WEEKLY)
+        presenterUserStats.retrieveUsageStats(UsageStatsManager.INTERVAL_DAILY)
+        adapter.addAdView()
     }
 
     private class TutorialPagesProvider : TutorialPageOptionsProvider {
@@ -196,18 +211,22 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                 0 -> {
                     pageLayoutResId = R.layout.fragment_page_first
                     tutorialItems = arrayOf(TransformItem.create(R.id.ivFirstImage, Direction.LEFT_TO_RIGHT, 0.20f), TransformItem.create(R.id.ivSecondImage, Direction.RIGHT_TO_LEFT, 0.06f), TransformItem.create(R.id.ivThirdImage, Direction.LEFT_TO_RIGHT, 0.08f), TransformItem.create(R.id.ivFourthImage, Direction.RIGHT_TO_LEFT, 0.1f), TransformItem.create(R.id.ivFifthImage, Direction.RIGHT_TO_LEFT, 0.03f), TransformItem.create(R.id.ivSixthImage, Direction.RIGHT_TO_LEFT, 0.09f), TransformItem.create(R.id.ivSeventhImage, Direction.RIGHT_TO_LEFT, 0.14f), TransformItem.create(R.id.ivEighthImage, Direction.RIGHT_TO_LEFT, 0.07f))
+                    FirebaseEventUtil.sendTutorialProcess(TUTORIAL_PROCESS_START)
                 }
                 1 -> {
                     pageLayoutResId = R.layout.fragment_page_third
                     tutorialItems = arrayOf(TransformItem.create(R.id.ivFirstImage, Direction.RIGHT_TO_LEFT, 0.20f), TransformItem.create(R.id.ivThirdImage, Direction.RIGHT_TO_LEFT, 0.08f), TransformItem.create(R.id.ivFourthImage, Direction.LEFT_TO_RIGHT, 0.1f), TransformItem.create(R.id.ivFifthImage, Direction.LEFT_TO_RIGHT, 0.03f), TransformItem.create(R.id.ivSixthImage, Direction.LEFT_TO_RIGHT, 0.09f), TransformItem.create(R.id.ivSeventhImage, Direction.LEFT_TO_RIGHT, 0.14f))
+                    FirebaseEventUtil.sendTutorialProcess(TUTORIAL_PROCESS_2)
                 }
                 2 -> {
                     pageLayoutResId = R.layout.fragment_page_fourth
                     tutorialItems = arrayOf(TransformItem.create(R.id.ivFirstImage, Direction.RIGHT_TO_LEFT, 0.2f), TransformItem.create(R.id.ivSecondImage, Direction.LEFT_TO_RIGHT, 0.06f), TransformItem.create(R.id.ivThirdImage, Direction.RIGHT_TO_LEFT, 0.08f), TransformItem.create(R.id.ivSixthImage, Direction.LEFT_TO_RIGHT, 0.09f), TransformItem.create(R.id.ivEighthImage, Direction.LEFT_TO_RIGHT, 0.07f))
+                    FirebaseEventUtil.sendTutorialProcess(TUTORIAL_PROCESS_3)
                 }
                 3 -> {
                     pageLayoutResId = R.layout.fragment_page_last
                     tutorialItems = arrayOf(TransformItem.create(R.id.ivFirstImage, Direction.LEFT_TO_RIGHT, 0.20f), TransformItem.create(R.id.ivSecondImage, Direction.RIGHT_TO_LEFT, 0.06f), TransformItem.create(R.id.ivThirdImage, Direction.LEFT_TO_RIGHT, 0.08f), TransformItem.create(R.id.ivFourthImage, Direction.RIGHT_TO_LEFT, 0.1f), TransformItem.create(R.id.ivSeventhImage, Direction.RIGHT_TO_LEFT, 0.14f), TransformItem.create(R.id.ivEighthImage, Direction.RIGHT_TO_LEFT, 0.07f))
+                    FirebaseEventUtil.sendTutorialProcess(TUTORIAL_PROCESS_4)
                 }
                 else -> {
                     throw IllegalArgumentException("Unknown position: $position")
@@ -231,6 +250,7 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
         override fun onClick(v: View) {
             flTutorial.visibility = GONE
             PreferenceUtil.getInstance(mContext).putBoolean(TUTORIAL_DONE.name, true)
+            FirebaseEventUtil.sendTutorialProcess(TUTORIAL_PROCESS_SKIP)
         }
     }
 }

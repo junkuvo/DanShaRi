@@ -5,5 +5,13 @@
         android:id="@+id/menu_filter"
         android:icon="@drawable/ic_filter_list_white_24dp"
         android:title="@string/title_filter"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_my_data"
+        android:icon="@drawable/ic_person_white_24dp"
+        android:title="@string/title_mypage"
+        android:visible="false"
         app:showAsAction="always" />
 </menu>
