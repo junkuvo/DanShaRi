@@ -75,7 +75,7 @@ class UsageStatsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun addAdView(){
-        if (resultList.size > 1) {
+        if (resultList.size >= AD_POSITION) {
             resultList.add(AD_POSITION, UsageStatsData())
             notifyItemInserted(AD_POSITION)
         }
