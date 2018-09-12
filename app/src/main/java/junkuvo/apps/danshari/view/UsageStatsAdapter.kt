@@ -75,8 +75,10 @@ class UsageStatsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun addAdView(){
-        resultList.add(AD_POSITION, UsageStatsData())
-        notifyItemInserted(AD_POSITION)
+        if (resultList.size > 1) {
+            resultList.add(AD_POSITION, UsageStatsData())
+            notifyItemInserted(AD_POSITION)
+        }
     }
 
     override fun getItemId(position: Int): Long {

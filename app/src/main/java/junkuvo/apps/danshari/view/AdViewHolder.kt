@@ -27,6 +27,5 @@ class AdViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
     fun bindTo() {
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
-        clAd.setOnClickListener { mAdView.performClick() }
     }
 }
