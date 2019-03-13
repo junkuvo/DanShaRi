@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.support.annotation.LayoutRes
@@ -143,6 +144,11 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                 }
             }
             R.id.menu_my_data -> {
+            }
+            R.id.menu_policy ->{
+                intent = Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://site-1308773-1371-5886.strikingly.com/"))
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)
