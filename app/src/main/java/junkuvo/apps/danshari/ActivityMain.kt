@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.support.annotation.LayoutRes
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.LinearLayoutManager
@@ -22,7 +23,6 @@ import android.widget.FrameLayout
 import android.widget.ProgressBar
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeSuccessDialog
 import com.cleveroad.slidingtutorial.*
 import junkuvo.apps.danshari.App.Companion.PERMISSION_REQUEST_CODE
 import junkuvo.apps.danshari.App.Companion.UNINSTALLER_REQUEST_CODE
@@ -179,16 +179,12 @@ class ActivityMain : AppCompatActivity(), UsageStatsContract.View {
                 FirebaseEventUtil.sendUninstall(UNINSTALL_TYPE_UNINSTALLED)
             } else if (resultCode == Activity.RESULT_FIRST_USER) {
                 // アンインストールできないアプリ
-                AwesomeSuccessDialog(this)
+                AlertDialog.Builder(this)
                         .setTitle("断捨離成功！")
                         .setMessage("アンインストールできないアプリでしたが…\n\n初期化に成功！\nキレイになりました！")
-                        .setColoredCircle(R.color.colorRoyalGreen)
-                        .setDialogIconAndColor(R.drawable.ic_done_white_36dp, R.color.white)
+                        .setIcon(R.drawable.ic_done_white_36dp)
                         .setCancelable(true)
-                        .setPositiveButtonText("閉じる")
-                        .setPositiveButtonClick({ })// 押して閉じる
-                        .setPositiveButtonbackgroundColor(R.color.colorRoyalGreen)
-                        .setPositiveButtonTextColor(R.color.white)
+                        .setPositiveButton("閉じる", null)
                         .show()
 
 
