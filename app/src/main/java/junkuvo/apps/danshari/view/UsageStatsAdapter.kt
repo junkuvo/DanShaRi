@@ -48,14 +48,18 @@ class UsageStatsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (position != 0) {
-            if (position == AD_POSITION) {
-                // ad do nothing
-            } else if (position == AD_POSITION + 1) {
-                val previous = resultList[1].usageStats?.lastTimeUsed ?: 0
-                resultList[position].previousTime = previous
-            } else {
-                val previous = resultList[position - 1].usageStats?.lastTimeUsed ?: 0
-                resultList[position].previousTime = previous
+            when (position) {
+                AD_POSITION -> {
+                    // ad do nothing
+                }
+                AD_POSITION + 1 -> {
+                    val previous = resultList[1].usageStats?.lastTimeUsed ?: 0
+                    resultList[position].previousTime = previous
+                }
+                else -> {
+                    val previous = resultList[position - 1].usageStats?.lastTimeUsed ?: 0
+                    resultList[position].previousTime = previous
+                }
             }
         }
 
@@ -103,7 +107,7 @@ class UsageStatsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return VIEW_TYPE_ITEM
     }
 
-    final val AD_POSITION = 2// 0,1,2の2
-    final val VIEW_TYPE_ITEM: Int = 0
-    final val VIEW_TYPE_AD: Int = 1
+    val AD_POSITION = 0// 0,1,2の2
+    val VIEW_TYPE_ITEM: Int = 0
+    val VIEW_TYPE_AD: Int = 1
 }
