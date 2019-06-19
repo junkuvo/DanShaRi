@@ -1,23 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    android:id="@+id/cl_ad"
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/ripple"
-    android:paddingTop="@dimen/basic_margin_8dp"
-    android:paddingBottom="@dimen/basic_margin_8dp"
-    >
+<com.google.android.gms.ads.formats.UnifiedNativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <com.google.android.gms.ads.doubleclick.PublisherAdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView_publisher"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:layout_constraintLeft_toLeftOf="parent"
-        ads:layout_constraintRight_toRightOf="parent"
-        ads:layout_constraintTop_toTopOf="parent"
-        ads:layout_constraintBottom_toBottomOf="parent"
-        ads:adUnitId="ca-app-pub-1630604043812019/1774232746"
-        />
+        android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_month"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/basic_margin_16dp"
+            android:gravity="center_vertical"
+            android:padding="@dimen/basic_margin_4dp"
+            android:textColor="@color/colorSecondary"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:text="3ヶ月以上前"
+            tools:visibility="visible" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple"
+            android:padding="@dimen/basic_margin_8dp">
+
+            <com.google.android.gms.ads.formats.MediaView
+                android:id="@+id/iv_thumbnail"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_alignParentStart="true"
+                android:paddingStart="8dp"
+                android:paddingEnd="16dp"
+                tools:src="@mipmap/ic_launcher" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_headline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/iv_thumbnail"
+                android:lines="1"
+                android:maxLines="1"
+                android:paddingTop="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                tools:text="Google" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_headline"
+                android:layout_toEndOf="@id/iv_thumbnail"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                tools:text="Last used: yesterday at 18.54" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</com.google.android.gms.ads.formats.UnifiedNativeAdView><!--<android.support.constraint.ConstraintLayout--><!--android:id="@+id/cl_ad"--><!--xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:background="@drawable/ripple"--><!--android:paddingTop="@dimen/basic_margin_8dp"--><!--android:paddingBottom="@dimen/basic_margin_8dp"--><!--&gt;-->
+
+    <!--<com.google.android.gms.ads.doubleclick.PublisherAdView xmlns:ads="http://schemas.android.com/apk/res-auto"--><!--android:id="@+id/adView_publisher"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--ads:adSize="BANNER"--><!--ads:layout_constraintLeft_toLeftOf="parent"--><!--ads:layout_constraintRight_toRightOf="parent"--><!--ads:layout_constraintTop_toTopOf="parent"--><!--ads:layout_constraintBottom_toBottomOf="parent"--><!--ads:adUnitId="ca-app-pub-1630604043812019/1774232746"--><!--/>-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->

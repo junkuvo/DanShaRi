@@ -1,12 +1,31 @@
 package junkuvo.apps.danshari.view
 
+import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.formats.MediaView
+import com.google.android.gms.ads.formats.NativeAdOptions
+import com.google.android.gms.ads.formats.NativeAdOptions.ADCHOICES_BOTTOM_RIGHT
+import com.google.android.gms.ads.formats.UnifiedNativeAd
+import com.google.android.gms.ads.formats.UnifiedNativeAdView
+import junkuvo.apps.danshari.BuildConfig
 import junkuvo.apps.danshari.R
 import junkuvo.apps.danshari.data.UsageStatsData
 
 class UsageStatsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var adLoader: AdLoader? = null
+    private var adView: UnifiedNativeAdView? = null
+    private val adId: String by lazy {
+        if (BuildConfig.DEBUG) {
+            "ca-app-pub-3940256099942544/2247696110"
+        } else {
+            "ca-app-pub-1630604043812019/6381386071"
+        }
+    }
 
     init {
         setHasStableIds(true)
@@ -23,8 +42,17 @@ class UsageStatsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 UsageStatsViewHolder(view)
             }
             VIEW_TYPE_AD -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_ad, parent, false)
-                AdViewHolder(view)
+                adView = LayoutInflater.from(parent.context).inflate(R.layout.item_ad, parent, false) as UnifiedNativeAdView
+                adLoader = AdLoader.Builder(parent.context, adId)
+                        // 読み込みが完了したら updateAdする
+                        .forUnifiedNativeAd { this.updateAd(it) }
+                        .withNativeAdOptions(NativeAdOptions.Builder()
+                                .setAdChoicesPlacement(ADCHOICES_BOTTOM_RIGHT).build())
+                        .build()
+                // 広告読み込み開始
+                adLoader?.loadAd(AdRequest.Builder().build())
+
+                AdViewHolder(adView)
             }
             else -> {
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.item_usage_stat, parent, false)
@@ -78,7 +106,7 @@ class UsageStatsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun addAdView(){
+    fun addAdView() {
         if (resultList.size >= AD_POSITION) {
             resultList.add(AD_POSITION, UsageStatsData())
             notifyItemInserted(AD_POSITION)
@@ -110,4 +138,21 @@ class UsageStatsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     val AD_POSITION = 0// 0,1,2の2
     val VIEW_TYPE_ITEM: Int = 0
     val VIEW_TYPE_AD: Int = 1
+
+    private fun updateAd(unifiedNativeAd: UnifiedNativeAd) {
+        adView?.let {
+            val tvHeadline = it.findViewById<AppCompatTextView>(R.id.tv_headline)
+            tvHeadline.text = unifiedNativeAd.headline
+            it.headlineView = tvHeadline
+
+            val tvBody = it.findViewById<AppCompatTextView>(R.id.tv_body)
+            tvBody.text = unifiedNativeAd.body
+            it.bodyView = tvBody
+
+            val mediaView = it.findViewById<MediaView>(R.id.iv_thumbnail)
+            it.mediaView = mediaView
+
+            it.setNativeAd(unifiedNativeAd)
+        }
+    }
 }
